@@ -1,0 +1,24 @@
+name: Conviso Security Gate
+
+on:
+  push:
+    branches: ["master", "main"]
+  pull_request:
+
+jobs:
+  run-security-gate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Conviso CLI
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/convisoinc/conviso-cli/master/install.sh | sh
+
+      - name: Authenticate Conviso CLI
+        run: conviso auth login --api-key ${{ secrets.CONVISO_API_KEY }}
+
+      - name: Apply Security Gate
+        run: conviso vulnerability assert-security-rules --rules-file security/security-gate.yml
