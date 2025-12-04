@@ -9,11 +9,11 @@ import { CaptchaModel } from '../models/captcha'
 
 // 🔒 Funções auxiliares seguras -----------------------------
 
-function isAllowedOperator(op: string): boolean {
+function isAllowedOperator (op: string): boolean {
   return op === '+' || op === '-' || op === '*'
 }
 
-function safeEvaluateThreeTerms(a: number, op1: string, b: number, op2: string, c: number): number {
+function safeEvaluateThreeTerms (a: number, op1: string, b: number, op2: string, c: number): number {
   if (!isAllowedOperator(op1) || !isAllowedOperator(op2)) {
     throw new Error('Operador inválido')
   }
