@@ -27,6 +27,9 @@ jobs:
 
       - name: Set API Key
         run: echo "CONVISO_API_KEY=${{ secrets.CONVISO_API_KEY }}" >> $GITHUB_ENV
+      
+      - name: Set Staging Environment
+        run: echo "CONVISO_API_URL=https://staging-api.convisoappsec.com" >> $GITHUB_ENV
 
       - name: Apply Security Gate
         run: conviso vulnerability assert-security-rules --rules-file security/security-gate.yml
