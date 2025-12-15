@@ -15,8 +15,8 @@ jobs:
 
       - name: Install Conviso CLI
         run: |
-        curl -fsSL https://downloads.convisoappsec.com/conviso-cli/install.sh | sh
-        echo "$HOME/.local/bin" >> $GITHUB_PATH
+          curl -fsSL https://downloads.convisoappsec.com/conviso-cli/install.sh | sh
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - name: Authenticate Conviso CLI
         run: conviso auth login --api-key ${{ secrets.CONVISO_API_KEY }}
