@@ -15,11 +15,17 @@ jobs:
 
       - name: Install Conviso CLI
         run: |
-          curl -fsSL https://downloads.convisoappsec.com/conviso-cli/install.sh | sh
+          curl -fsSL https://downloads.convisoappsec.com/conviso-cli/install.sh -o install.sh
+          bash install.sh
           echo "$HOME/.local/bin" >> $GITHUB_PATH
+          ls -l $HOME/.local/bin
+          which conviso || true
 
-      - name: Authenticate Conviso CLI
+      - name: Test CLI
+        run: conviso --version
+
+      - name: Authenticate
         run: conviso auth login --api-key ${{ secrets.CONVISO_API_KEY }}
 
-      - name: Apply Security Gate
+      - name: Security Gate
         run: conviso vulnerability assert-security-rules --rules-file security/security-gate.yml
