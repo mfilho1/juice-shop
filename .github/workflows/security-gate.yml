@@ -1,35 +1,29 @@
-name: Conviso Security Gate
+name: Conviso Security Gate (Staging)
 
 on:
   push:
-    branches: ["master", "main"]
-  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
 
 jobs:
-  run-security-gate:
+  conviso-ast:
     runs-on: ubuntu-latest
 
+    container:
+      image: convisoappsec/convisocli:latest
+      env:
+        CONVISO_API_KEY: ${{ secrets.CONVISO_API_KEY }}
+        CONVISO_COMPANY_ID: 442
+        CONVISO_API_URL: "https://staging.convisoappsec.com"
+        CONVISO_ASSET_NAME: "juice-shop"   
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
 
-      - name: Install pipx
-        run: |
-          python3 -m pip install --user pipx
-          python3 -m pipx ensurepath
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
-
-      - name: Install Conviso CLI
-        run: pipx install conviso-cli
-
-      - name: Test CLI
-        run: conviso --version
-
-      - name: Set API Key
-        run: echo "CONVISO_API_KEY=${{ secrets.CONVISO_API_KEY }}" >> $GITHUB_ENV
-      
-      - name: Set Staging Environment
-        run: echo "CONVISO_API_URL=https://staging-api.convisoappsec.com" >> $GITHUB_ENV
-
-      - name: Apply Security Gate
-        run: conviso vulnerability assert-security-rules --rules-file security/security-gate.yml
+    - name: Run AST and Security Gate
+      run: |
+        conviso ast run --vulnerability-auto-close
+        conviso vulnerability assert-security-rules --rules-file security/security-gate.yml
