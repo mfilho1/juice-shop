@@ -25,8 +25,8 @@ jobs:
       - name: Test CLI
         run: conviso --version
 
-      - name: Authenticate CLI
-        run: conviso auth login --api-key ${{ secrets.CONVISO_API_KEY }}
+      - name: Set API Key
+        run: echo "CONVISO_API_KEY=${{ secrets.CONVISO_API_KEY }}" >> $GITHUB_ENV
 
       - name: Apply Security Gate
         run: conviso vulnerability assert-security-rules --rules-file security/security-gate.yml
