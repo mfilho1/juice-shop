@@ -13,19 +13,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install Conviso CLI
+      - name: Install pipx
         run: |
-          curl -fsSL https://downloads.convisoappsec.com/conviso-cli/install.sh -o install.sh
-          bash install.sh
+          python3 -m pip install --user pipx
+          python3 -m pipx ensurepath
           echo "$HOME/.local/bin" >> $GITHUB_PATH
-          ls -l $HOME/.local/bin
-          which conviso || true
+
+      - name: Install Conviso CLI
+        run: pipx install conviso-cli
 
       - name: Test CLI
         run: conviso --version
 
-      - name: Authenticate
+      - name: Authenticate CLI
         run: conviso auth login --api-key ${{ secrets.CONVISO_API_KEY }}
 
-      - name: Security Gate
+      - name: Apply Security Gate
         run: conviso vulnerability assert-security-rules --rules-file security/security-gate.yml
