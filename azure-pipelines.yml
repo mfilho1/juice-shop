@@ -1,0 +1,17 @@
+trigger:
+  - master  
+jobs:
+- job: Conviso_Appsec_AST
+  pool:
+    vmImage: ubuntu-latest
+  container:
+    image: 'convisoappsec/convisocli'
+
+  steps:
+    - checkout: self
+      persistCredentials: true
+    - bash: |
+          conviso ast run --vulnerability-auto-close
+      displayName: 'Running Conviso AST'
+      env:
+         CONVISO_API_KEY: $(CONVISO_API_KEY)
