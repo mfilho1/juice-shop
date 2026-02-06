@@ -1,24 +1,26 @@
-name: Conviso AST Scan (Legacy)
-
 on:
   push:
-    branches:
-      - master
+    branches: [ master ]
+  workflow_dispatch:
 
 jobs:
-  Conviso_Appsec_AST:
+  conviso-ast:
     runs-on: ubuntu-latest
 
-   container:
+    container:
       image: convisoappsec/convisocli:latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Running Conviso AST
-        run: conviso ast run --vulnerability-auto-close
       env:
         CONVISO_API_KEY: ${{ secrets.CONVISO_API_KEY }}
         CONVISO_COMPANY_ID: 442
         CONVISO_API_URL: "https://staging.convisoappsec.com"
-        CONVISO_ASSET_NAME: "juice-shop-mfilho" # ajuste para seu asset real
+        CONVISO_ASSET_NAME: "juice-shop"   
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Run AST and Security Gate
+      run: |
+        conviso ast run --vulnerability-auto-close
