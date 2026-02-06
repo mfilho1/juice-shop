@@ -19,3 +19,4 @@ jobs:
         run: conviso ast run --vulnerability-auto-close
         env:
           CONVISO_API_KEY: ${{ secrets.CONVISO_API_KEY }}
+          CONVISO_ENV: staging
