@@ -13,7 +13,7 @@ jobs:
         CONVISO_API_KEY: ${{ secrets.CONVISO_API_KEY }}
         CONVISO_COMPANY_ID: 442
         CONVISO_API_URL: "https://staging.convisoappsec.com"
-        CONVISO_ASSET_NAME: "juice-shop"   
+        CONVISO_ASSET_NAME: "juice-shop-mfilho"   
 
     steps:
     - name: Checkout repository
