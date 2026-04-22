@@ -86,7 +86,7 @@ For a detailed introduction, full list of features and architecture overview ple
 4. Run `npm start`
 5. Browse to <http://localhost:3000>
 
-> Each packaged distribution includes some binaries for `sqlite3` and
+> Each packaged distribution includes some binaries for `sqlite3` and asssdas
 > `libxmljs2` bound to the OS and node.js version which `npm install` was
 > executed on.
 
