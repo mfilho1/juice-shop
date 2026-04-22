@@ -1,0 +1,1 @@
+Só um texto de validação de execução de pipeline.
