@@ -82,7 +82,7 @@ For a detailed introduction, full list of features and architecture overview ple
 2. Download `juice-shop-<version>_<node-version>_<os>_x64.zip` (or
    `.tgz`) attached to
    [latest release](https://github.com/juice-shop/juice-shop/releases/latest)
-3. Unpack and `cd` into the unpacked folder
+3. Unpack and `cd` into the unpacked folderrrrrrrrr
 4. Run `npm start`
 5. Browse to <http://localhost:3000>
 
