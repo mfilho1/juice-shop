@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: convisoappsec/convisocli:latest
+      image: 
       env:
         CONVISO_API_KEY: ${{ secrets.CONVISO_API_KEY }}
         CONVISO_COMPANY_ID: 442
