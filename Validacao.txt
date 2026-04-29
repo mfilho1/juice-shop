@@ -1,4 +1,4 @@
-Só um texto de validação de execução de pipeline.
+rSó um texto de validação de execução de pipeline.
 
 atuyalizaçao de validaçao
 
@@ -20,3 +20,5 @@ mais um
 mais um de novo
 
 Sera que agora vai
+
+e agora
